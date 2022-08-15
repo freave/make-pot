@@ -46,7 +46,7 @@ Allows you to run the create-pot command.<br>
 `npm link`
 
 To undo this link use<br>
-`npm unlink`
+`npm unlink create-pot`<br>
 `npm rm --global create-pot`
 
 Runs the command.<br>
