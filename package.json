@@ -11,8 +11,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w",
-    "testing": "create-pot"
+    "watch": "tsc -w"
   },
   "repository": {
     "type": "git",

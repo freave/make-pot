@@ -1,5 +1,5 @@
 #! /usr/bin/env node
 
-import { createPot } from "./script";
+import { createPot } from "./cli";
 
 createPot();
