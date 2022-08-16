@@ -1,8 +1,6 @@
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/fas-language.svg" alt="Logo" width="80" height="80">
-  </a>
+<img src="images/fas-language-freave-green.svg" alt="Logo" height="100">
 
 <h3 align="center">Freave create-pot</h3>
 
