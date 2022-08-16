@@ -44,8 +44,8 @@ export const createPot = () => {
 
         let potFile = potHeader + potContent;
 
-        fs.writeFileSync(args.destination + '\\' + outputName, potFile);
-        console.log(c.green('\nPOT file created in ' + args.destination + '\\' + outputName));
+        fs.writeFileSync(args.destination + '/' + outputName, potFile);
+        console.log(c.green('\nPOT file created in ' + args.destination + '/' + outputName));
     });
 
 }

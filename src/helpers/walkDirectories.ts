@@ -1,49 +1,32 @@
-import fs from "fs";
-import path from "node:path";
+import {readdir} from "node:fs/promises";
+import {resolve} from "node:path";
 
-export const walk = (dir: string, done: Function) => {
-    let results: string[] = [];
+// https://stackoverflow.com/a/45130990/8678755
+async function* getFiles(dir: string): any {
+    const dirents = await readdir(dir, {withFileTypes: true});
+    for (const dirent of dirents) {
+        const res = resolve(dir, dirent.name);
+        if (dirent.isDirectory()) {
+            yield* getFiles(res);
+        } else {
+            yield res;
+        }
+    }
+}
 
-    fs.readdir(dir, (err, list) => {
-        if (err) return done(err);
-
-        let pending = list.length;
-        if (!pending) return done(null, results);
-
-        list.forEach((file) => {
-            file = path.resolve(dir, file);
-
-            fs.stat(file, (err, stat) => {
-                if (stat && stat.isDirectory()) {
-
-                    walk(file, (err: NodeJS.ErrnoException | null, res: any) => {
-                        results = results.concat(res);
-                        if (!--pending) done(null, results);
-                    });
-
-                } else {
-
-                    results.push(file);
-                    if (!--pending) done(null, results);
-
-                }
-            });
-
-        });
-    });
-};
-
-export const walkDirectories = (dirs: string[], done: any) => {
+export const walkDirectories = async (dirs: string[], done: any) => {
     let results: any[] = [];
 
     let pending = dirs.length;
 
     if (!pending) return done(null, results);
 
-    dirs.forEach((dir: string) => {
-        walk(dir, (err: any, res: any) => {
-            results = results.concat(res);
-            if (!--pending) done(null, results);
-        });
-    });
+    for (const dir of dirs) {
+        for await (const f of getFiles(dir)) {
+            results = results.concat(f);
+        }
+
+        if (!--pending) done(null, results);
+
+    }
 }
