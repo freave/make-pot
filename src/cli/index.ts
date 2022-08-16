@@ -12,7 +12,7 @@ const outputName = 'domain.pot';
 
 export const createPot = () => {
 
-    console.log(c.black.bgGreen("Freave POT generator " + getVersion()));
+    console.log(c.black.bgGreen("Freave create-pot " + getVersion()));
     console.log(c.green("Searching in the following directories: "));
 
     for (let directory of args.source) {
