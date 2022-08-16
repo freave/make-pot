@@ -2,26 +2,30 @@ import yargs from "yargs";
 import {hideBin} from "yargs/helpers";
 import {getVersion} from "./getVersion";
 
-export const initArgs = ():Array<string> => {
-    setCommands();
-    return getArgs();
+interface createPotArguments {
+    /** Positional arguments */
+    _: (string | number)[];
+    $0: string;
+    source: Array<string>;
+    destination: Array<string>;
 }
 
-const setCommands = () => {
-    yargs
+export const initArgs = (): createPotArguments => {
+    return <createPotArguments>yargs(hideBin(process.argv))
         .scriptName("create-pot")
         .usage("$0 <args>")
         .version(getVersion())
         .options({
-            'directories': {
+            'source': {
                 demandOption: true,
-                describe: "Comma-seperated list of directories that should be searched.",
-                type: "string"
+                describe: "Space-seperated list of directories that should be searched.",
+                type: "array"
+            },
+            'destination': {
+                demandOption: true,
+                describe: "Directory where the POT file will be placed.",
+                type: "array"
             }
         })
         .parse();
-}
-
-const getArgs = (): any => {
-    return yargs(hideBin(process.argv)).argv;
 }
