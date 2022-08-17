@@ -38,7 +38,7 @@ export const createPot = async () => {
 
     console.log(c.green("Searching " + filteredResults.length + " files..."));
 
-    let allMatches = getMatches(filteredResults);
+    let allMatches = await getMatches(filteredResults);
 
     console.log(c.black.bgGreen('Found ' + allMatches.length + ' matches.'));
 
