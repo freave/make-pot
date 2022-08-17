@@ -10,7 +10,7 @@ const args = initArgs();
 
 const outputName = 'domain.pot';
 
-export const createPot = () => {
+export const createPot = async () => {
 
     console.log(c.black.bgGreen("Freave create-pot " + getVersion()));
     console.log(c.green("Searching in the following directories: "));
@@ -19,33 +19,40 @@ export const createPot = () => {
         console.log(c.green(directory));
     }
 
-    walkDirectories(args.source, (err: any, results: string[]) => {
-        if (err) throw err;
+    const results: any[] = await walkDirectories(args.source);
 
-        // filter out the files ending in .pot
-        let filteredResults = results.filter((result: string) => {
-            return !result.match(/.pot$/);
-        });
+    if (results.length === 0) {
+        console.log(c.red("No matches found."));
+        return;
+    }
 
-        console.log(c.green("Searching " + filteredResults.length + " files..."));
-
-        let allMatches = getMatches(filteredResults);
-
-        console.log(c.black.bgGreen('Found ' + allMatches.length + ' matches.'));
-
-        let potContent = '';
-
-        for (let singleMatch of allMatches) {
-            potContent += '\n\n# ' + singleMatch.filename + ':' + singleMatch.linenumber + '\n' +
-                'msgctxt "' + singleMatch.match.context + '"\n' +
-                'msgid "' + singleMatch.match.text + '"\n' +
-                'msgstr ""';
-        }
-
-        let potFile = potHeader + potContent;
-
-        fs.writeFileSync(args.destination + '/' + outputName, potFile);
-        console.log(c.green('\nPOT file created in ' + args.destination + '/' + outputName));
+    // filter out the files ending in .pot
+    let filteredResults = results.filter((result: string) => {
+        return !result.match(/.pot$/);
     });
 
+    if (filteredResults.length === 0) {
+        console.log(c.red("No matches found."));
+        return;
+    }
+
+    console.log(c.green("Searching " + filteredResults.length + " files..."));
+
+    let allMatches = getMatches(filteredResults);
+
+    console.log(c.black.bgGreen('Found ' + allMatches.length + ' matches.'));
+
+    let potContent = '';
+
+    for (let singleMatch of allMatches) {
+        potContent += '\n\n# ' + singleMatch.filename + ':' + singleMatch.linenumber + '\n' +
+            'msgctxt "' + singleMatch.match.context + '"\n' +
+            'msgid "' + singleMatch.match.text + '"\n' +
+            'msgstr ""';
+    }
+
+    let potFile = potHeader + potContent;
+
+    fs.writeFileSync(args.destination + '/' + outputName, potFile);
+    console.log(c.green('\nPOT file created in ' + args.destination + '/' + outputName));
 }

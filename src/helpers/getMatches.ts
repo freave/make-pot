@@ -4,6 +4,7 @@ const lineEnding = '\n';
 
 export const getMatches = (files: string[]) => {
     let results: any[] = [];
+
     for (let file of files) {
         let content = fs.readFileSync(file, 'utf8');
         let formattedMatches = [];
