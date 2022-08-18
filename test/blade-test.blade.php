@@ -38,5 +38,5 @@
     @php _n_noop('singular 3', 'plural 3', 'domain') @endphp
 </p>
 <p>
-    @php _nx_noop('singular 4, 'plural 4', 'context', 'domain') @endphp
+    @php _nx_noop('singular 4', 'plural 4', 'context', 'domain') @endphp
 </p>
