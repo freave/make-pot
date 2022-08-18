@@ -1,10 +1,8 @@
 import c from "ansi-colors";
-import fs from "fs";
 import {walkDirectories} from "../helpers/walkDirectories";
 import {getMatches} from "../helpers/getMatches";
 import {getVersion} from "../helpers/getVersion";
 import {initArgs} from "../helpers/args";
-import {potHeader} from "../consts";
 import {writePotFile} from "../helpers/writePotFile";
 
 const args = initArgs();

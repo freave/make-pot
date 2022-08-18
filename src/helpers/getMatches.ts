@@ -1,4 +1,5 @@
 import {readFile} from "node:fs/promises";
+import {matchGroups} from "../consts";
 
 const lineEnding = '\n';
 
@@ -21,34 +22,30 @@ export const getMatches = async (files: string[]) => {
             }
         ));
 
-
-    let formattedMatches = [];
+    let formattedMatches: any[] = [];
 
     for (let content of contents) {
 
-        let matches = content.body.match(/_x\(.*?\)/gm);
+        for (let matchGroup of matchGroups) {
 
-        if (matches) {
-            for (let match of matches) {
+            let results = content.body.match(matchGroup.matchRegex);
 
-                let lineNumber = content.body.substring(0, content.body.indexOf(match)).split(lineEnding).length;
+            if (results) {
+                for (let match of results) {
+                    let lineNumber = content.body.substring(0, content.body.indexOf(match)).split(lineEnding).length;
 
-                let splitMatch = match.match(/_x\(\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*\)/);
+                    let splitMatch = match.match(matchGroup.extractRegex);
 
-                if (splitMatch) {
-                    let formattedMatch = {
-                        text: splitMatch[1],
-                        context: splitMatch[2],
-                        domain: splitMatch[3]
+                    if (splitMatch) {
+
+                        formattedMatches.push({
+                            filename: content.filename,
+                            linenumber: lineNumber,
+                            match: matchGroup.formatMatch(splitMatch)
+                        });
                     }
-                    formattedMatches.push({
-                        'filename': content.filename,
-                        'linenumber': lineNumber,
-                        'match': formattedMatch
-                    });
                 }
             }
-
         }
     }
 
