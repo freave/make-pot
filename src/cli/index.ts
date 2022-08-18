@@ -5,6 +5,7 @@ import {getMatches} from "../helpers/getMatches";
 import {getVersion} from "../helpers/getVersion";
 import {initArgs} from "../helpers/args";
 import {potHeader} from "../consts";
+import {writePotFile} from "../helpers/writePotFile";
 
 const args = initArgs();
 
@@ -42,17 +43,7 @@ export const createPot = async () => {
 
     console.log(c.black.bgGreen('Found ' + allMatches.length + ' matches.'));
 
-    let potContent = '';
+    writePotFile(allMatches, args.destination, outputName);
 
-    for (let singleMatch of allMatches) {
-        potContent += '\n\n# ' + singleMatch.filename + ':' + singleMatch.linenumber + '\n' +
-            'msgctxt "' + singleMatch.match.context + '"\n' +
-            'msgid "' + singleMatch.match.text + '"\n' +
-            'msgstr ""';
-    }
-
-    let potFile = potHeader + potContent;
-
-    fs.writeFileSync(args.destination + '/' + outputName, potFile);
     console.log(c.green('\nPOT file created in ' + args.destination + '/' + outputName));
 }
