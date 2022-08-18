@@ -2,17 +2,17 @@
   "name": "create-pot",
   "version": "0.0.1",
   "description": "Scans files in a given directory for translatable strings. Generates a POT file.",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "files": [
     "dist"
   ],
   "bin": {
-    "create-pot": "dist/index.js"
+    "create-pot": "dist/src/index.js"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "pot":"create-pot --source C:/Projects/freave/create-pot/test/nested --destination C:/Projects/freave/create-pot/test"
+    "pot": "create-pot --source C:/Projects/freave/create-pot/test/nested --destination C:/Projects/freave/create-pot/test"
   },
   "repository": {
     "type": "git",
