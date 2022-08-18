@@ -1,49 +1,36 @@
-import fs from "fs";
-import path from "node:path";
+import {readdir} from "node:fs/promises";
+import {resolve} from "node:path";
+import c from "ansi-colors";
 
-export const walk = (dir: string, done: Function) => {
-    let results: string[] = [];
+// https://stackoverflow.com/a/45130990/8678755
+async function getFiles(dir: string): Promise<any> {
 
-    fs.readdir(dir, (err, list) => {
-        if (err) return done(err);
+    let dirents: any[] = [];
 
-        let pending = list.length;
-        if (!pending) return done(null, results);
+    try {
+        dirents = await readdir(dir, {withFileTypes: true});
+    } catch (e) {
+        console.log(c.red(`Could not read directory: ${dir}`));
+        return [];
+    }
 
-        list.forEach((file) => {
-            file = path.resolve(dir, file);
+    const files = await Promise.all(dirents.map((dirent) => {
+        const res = resolve(dir, dirent.name);
+        return dirent.isDirectory() ? getFiles(res) : res;
+    }));
+    return Array.prototype.concat(...files);
+}
 
-            fs.stat(file, (err, stat) => {
-                if (stat && stat.isDirectory()) {
-
-                    walk(file, (err: NodeJS.ErrnoException | null, res: any) => {
-                        results = results.concat(res);
-                        if (!--pending) done(null, results);
-                    });
-
-                } else {
-
-                    results.push(file);
-                    if (!--pending) done(null, results);
-
-                }
-            });
-
-        });
-    });
-};
-
-export const walkDirectories = (dirs: string[], done: any) => {
+export const walkDirectories = async (directories: string[]): Promise<any[]> => {
     let results: any[] = [];
 
-    let pending = dirs.length;
+    if (!directories.length) return results;
 
-    if (!pending) return done(null, results);
+    for (const directory of directories) {
+        results.push(getFiles(directory));
+    }
 
-    dirs.forEach((dir: string) => {
-        walk(dir, (err: any, res: any) => {
-            results = results.concat(res);
-            if (!--pending) done(null, results);
-        });
-    });
+    const resolvedResults = await Promise.all(results);
+
+    return resolvedResults.flat();
 }

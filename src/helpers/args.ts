@@ -7,7 +7,7 @@ interface createPotArguments {
     _: (string | number)[];
     $0: string;
     source: Array<string>;
-    destination: Array<string>;
+    destination: string;
 }
 
 export const initArgs = (): createPotArguments => {
@@ -24,7 +24,7 @@ export const initArgs = (): createPotArguments => {
             'destination': {
                 demandOption: true,
                 describe: "Directory where the POT file will be placed.",
-                type: "array"
+                type: "string"
             }
         })
         .parse();
