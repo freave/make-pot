@@ -142,4 +142,54 @@ export const matchGroups: MatchGroup[] = [
             };
         }
     },
+    {
+        wpFunction: '_n',
+        matchRegex: new RegExp(/_n\(.*?\)/gs),
+        extractRegex: new RegExp(/_n\(\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*,\s*(.*?)\s*,\s*['"](.*?)['"]\s*\)/),
+        formatMatch: (match: string[]) => {
+            return {
+                text: match[1],
+                plural: match[2],
+                domain: match[4]
+            };
+        }
+    },
+    {
+        wpFunction: '_nx',
+        matchRegex: new RegExp(/_nx\(.*?\)/gs),
+        extractRegex: new RegExp(/_nx\(\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*,\s*(.*?)\s*,\s*['"](.*?)['"]\s*, \s*['"](.*?)['"]\s*\)/),
+        formatMatch: (match: string[]) => {
+            return {
+                text: match[1],
+                plural: match[2],
+                context: match[4],
+                domain: match[5]
+            };
+        }
+    },
+    {
+        wpFunction: '_n_noop',
+        matchRegex: new RegExp(/_n_noop\(.*?\)/gs),
+        extractRegex: new RegExp(/_n_noop\(\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*\)/),
+        formatMatch: (match: string[]) => {
+            return {
+                text: match[1],
+                plural: match[2],
+                domain: match[4]
+            };
+        }
+    },
+    {
+        wpFunction: '_nx_noop',
+        matchRegex: new RegExp(/_nx_noop\(.*?\)/gs),
+        extractRegex: new RegExp(/_nx_noop\(\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*, \s*['"](.*?)['"]\s*\)/),
+        formatMatch: (match: string[]) => {
+            return {
+                text: match[1],
+                plural: match[2],
+                context: match[3],
+                domain: match[4]
+            };
+        }
+    },
 ]
