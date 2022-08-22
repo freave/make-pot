@@ -22,4 +22,3 @@
     @php _nx_noop('singular split 4',
     'plural 4', 'context', 'domain') @endphp
 </p>
-
