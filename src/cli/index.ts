@@ -9,11 +9,6 @@ const args = initArgs();
 
 export const makePot = async () => {
     console.log(c.black.bgGreen("Freave make-pot " + getVersion()));
-    console.log(c.green("Searching in the following directories: "));
-
-    for (let directory of args.source) {
-        console.log(c.green(directory));
-    }
 
     const results: any[] = await walkDirectories(args.source);
 

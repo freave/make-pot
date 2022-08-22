@@ -1,11 +1,12 @@
 import {potHeader} from "../consts";
 import {writeFileSync} from "fs";
+import path from "node:path";
 
 export const writePotFile = (data: any[], destination: string, domain: string) => {
     let potContent = '';
 
     for (let singleMatch of data) {
-        potContent += '\n\n# ' + singleMatch.filename + ':' + singleMatch.linenumber + '\n';
+        potContent += '\n\n# ' + path.relative(process.cwd(), singleMatch.filename) + ':' + singleMatch.linenumber + '\n';
 
         if (singleMatch.match.context) {
             potContent += 'msgctxt "' + singleMatch.match.context + '"\n';
