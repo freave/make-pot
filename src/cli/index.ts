@@ -7,9 +7,8 @@ import {writePotFile} from "../helpers/writePotFile";
 
 const args = initArgs();
 
-export const createPot = async () => {
-
-    console.log(c.black.bgGreen("Freave create-pot " + getVersion()));
+export const makePot = async () => {
+    console.log(c.black.bgGreen("Freave make-pot " + getVersion()));
     console.log(c.green("Searching in the following directories: "));
 
     for (let directory of args.source) {

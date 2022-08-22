@@ -2,15 +2,15 @@
 <div align="center">
 <img src="images/fas-language-freave-green.svg" alt="Logo" height="100">
 
-<h3 align="center">Freave create-pot</h3>
+<h3 align="center">Freave make-pot</h3>
 
   <p align="center">
-    Scan files and create a POT file for translation.
+    Scan files and make a POT file for translation.
     <br />
     <br />
-    <a href="https://github.com/freave/create-pot/issues">Report Bug</a>
+    <a href="https://github.com/freave/make-pot/issues">Report Bug</a>
     ·
-    <a href="https://github.com/freave/create-pot/issues">Request Feature</a>
+    <a href="https://github.com/freave/make-pot/issues">Request Feature</a>
   </p>
 </div>
 
@@ -40,22 +40,22 @@ Install dependencies.<br>
 Compile TypeScript.<br>
 `npm run watch`
 
-Allows you to run the create-pot command.<br>
+Allows you to run the make-pot command.<br>
 `npm link`
 
 To undo this link use<br>
-`npm unlink create-pot`<br>
-`npm rm --global create-pot`
+`npm unlink make-pot`<br>
+`npm rm --global make-pot`
 
 Runs the command.<br>
-`create-pot`
+`make-pot`
 
 ### Development in a separate project
 from the root of the project run this command.<br>
 `npm pack`
 
 In a separate project add this to package.json to use this local version:<br>
-`"create-pot": "path/to/create-pot-0.0.1.tgz"`
+`"make-pot": "path/to/make-pot-0.0.1.tgz"`
 
 Run npm install and use package as you normally would.
 
@@ -67,7 +67,7 @@ Run npm install and use package as you normally would.
 - [ ] Support all WordPress translation functions
 - [ ] Option to select output type (POT or JSON)
 
-See the [open issues](https://github.com/freave/create-pot/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/freave/make-pot/issues) for a full list of proposed features (and known issues).
 
 
 ## Contributing

@@ -1,5 +1,5 @@
 {
-  "name": "create-pot",
+  "name": "make-pot",
   "version": "0.0.1",
   "description": "Scans files in a given directory for translatable strings. Generates a POT file.",
   "main": "dist/src/index.js",
@@ -7,16 +7,16 @@
     "dist"
   ],
   "bin": {
-    "create-pot": "dist/src/index.js"
+    "make-pot": "dist/src/index.js"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "pot": "create-pot --source test/nested --destination test --domain domain"
+    "pot": "make-pot --source test/nested --destination test --domain domain"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/freave/create-pot.git"
+    "url": "git+https://github.com/freave/make-pot.git"
   },
   "keywords": [
     "pot",
@@ -31,9 +31,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/freave/create-pot/issues"
+    "url": "https://github.com/freave/make-pot/issues"
   },
-  "homepage": "https://github.com/freave/create-pot#readme",
+  "homepage": "https://github.com/freave/make-pot#readme",
   "devDependencies": {
     "@types/node": "^18.7.2",
     "@types/yargs": "^17.0.11",

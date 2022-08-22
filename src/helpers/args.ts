@@ -2,7 +2,7 @@ import yargs from "yargs";
 import {hideBin} from "yargs/helpers";
 import {getVersion} from "./getVersion";
 
-interface createPotArguments {
+interface makePotArguments {
     /** Positional arguments */
     _: (string | number)[];
     $0: string;
@@ -11,9 +11,9 @@ interface createPotArguments {
     domain: string;
 }
 
-export const initArgs = (): createPotArguments => {
-    return <createPotArguments>yargs(hideBin(process.argv))
-        .scriptName("create-pot")
+export const initArgs = (): makePotArguments => {
+    return <makePotArguments>yargs(hideBin(process.argv))
+        .scriptName("make-pot")
         .usage("$0 <args>")
         .version(getVersion())
         .options({
