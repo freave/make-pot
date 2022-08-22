@@ -1,7 +1,7 @@
 import {potHeader} from "../consts";
 import {writeFileSync} from "fs";
 
-export const writePotFile = (data: any[], destination: string, outputName: string) => {
+export const writePotFile = (data: any[], destination: string, domain: string) => {
     let potContent = '';
 
     for (let singleMatch of data) {
@@ -24,5 +24,5 @@ export const writePotFile = (data: any[], destination: string, outputName: strin
 
     let potFile = potHeader + potContent;
 
-    writeFileSync(destination + '/' + outputName, potFile);
+    writeFileSync(destination + '/' + domain + '.pot', potFile);
 }

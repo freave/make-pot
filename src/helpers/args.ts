@@ -8,6 +8,7 @@ interface createPotArguments {
     $0: string;
     source: Array<string>;
     destination: string;
+    domain: string;
 }
 
 export const initArgs = (): createPotArguments => {
@@ -24,6 +25,11 @@ export const initArgs = (): createPotArguments => {
             'destination': {
                 demandOption: true,
                 describe: "Directory where the POT file will be placed.",
+                type: "string"
+            },
+            'domain': {
+                demandOption: true,
+                describe: "The domain that will be used in the POT file.",
                 type: "string"
             }
         })

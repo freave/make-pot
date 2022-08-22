@@ -7,8 +7,6 @@ import {writePotFile} from "../helpers/writePotFile";
 
 const args = initArgs();
 
-const outputName = 'domain.pot';
-
 export const createPot = async () => {
 
     console.log(c.black.bgGreen("Freave create-pot " + getVersion()));
@@ -39,9 +37,13 @@ export const createPot = async () => {
 
     let allMatches = await getMatches(filteredResults);
 
-    console.log(c.black.bgGreen('Found ' + allMatches.length + ' matches.'));
+    let filteredMatches = allMatches.filter((match: any) => {
+        return match.match.domain === args.domain;
+    });
 
-    writePotFile(allMatches, args.destination, outputName);
+    console.log(c.black.bgGreen('Found ' + filteredMatches.length + ' matches.'));
 
-    console.log(c.green('\nPOT file created in ' + args.destination + '/' + outputName));
+    writePotFile(filteredMatches, args.destination, args.domain);
+
+    console.log(c.green('\nPOT file created in ' + args.destination + '/' + args.domain + '.pot'));
 }

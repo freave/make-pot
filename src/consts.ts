@@ -171,13 +171,11 @@ export const matchGroups: MatchGroup[] = [
         wpFunction: '_n_noop',
         matchRegex: new RegExp(/_n_noop\(.*?\)/gs),
         extractRegex: new RegExp(/_n_noop\(\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*,\s*['"](.*?)['"]\s*\)/),
-        formatMatch: (match: string[]) => {
-            return {
-                text: match[1],
-                plural: match[2],
-                domain: match[4]
-            };
-        }
+        formatMatch: (match: string[]) => ({
+            text: match[1],
+            plural: match[2],
+            domain: match[3]
+        })
     },
     {
         wpFunction: '_nx_noop',
