@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-<img src="images/fas-language-freave-green.svg" alt="Logo" height="100">
+<img src="https://freave.cdn.freavehd.net/com/logos/fas-language-freave-green.svg" alt="Logo" height="100">
 
 <h3 align="center">Freave make-pot</h3>
 
@@ -91,4 +91,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Credits
 
 Mike van Egmond - [egmond.dev](https://egmond.dev) - mikevanegmond1998@gmail.com<br>
-Freave - [Freave.com](https://www.freave.com) - support@freave.com
+Freave B.V. - [Freave.com](https://www.freave.com) - oss@freave.com
