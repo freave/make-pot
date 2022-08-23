@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "pot": "make-pot --source test/nested --destination test --domain domain --headers.projectIdVersion=1.0"
+    "pot": "make-pot --source test/nested --destination test --domain domain"
   },
   "repository": {
     "type": "git",
