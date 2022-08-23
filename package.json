@@ -1,6 +1,6 @@
 {
   "name": "@freave/make-pot",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Scans files in a given directory for translatable strings. Generates a POT file.",
   "main": "dist/src/index.js",
   "files": [
