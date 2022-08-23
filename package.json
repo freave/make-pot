@@ -1,0 +1,46 @@
+{
+  "name": "@freave/make-pot",
+  "version": "0.0.5-beta",
+  "description": "Scans files in a given directory for translatable strings. Generates a POT file.",
+  "main": "dist/src/index.js",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "make-pot": "dist/src/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "pot": "make-pot --source test/nested --destination test --domain domain"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freave/make-pot.git"
+  },
+  "keywords": [
+    "pot",
+    "wordpress",
+    "php",
+    "blade"
+  ],
+  "author": "Mike van Egmond <mikevanegmond1998@gmail.com> (https://egmond.dev)",
+  "contributors": [
+    "Mike van Egmond <mikevanegmond1998@gmail.com> (https://egmond.dev)",
+    "Freave <support@freave.com> (https://www.freave.com)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freave/make-pot/issues"
+  },
+  "homepage": "https://github.com/freave/make-pot#readme",
+  "devDependencies": {
+    "@types/node": "^18.7.2",
+    "@types/yargs": "^17.0.11",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.3",
+    "yargs": "^17.5.1"
+  }
+}
