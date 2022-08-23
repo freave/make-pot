@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "pot": "make-pot --source test/nested --destination test --domain domain"
+    "pot": "make-pot --source test/nested --destination test --domain domain --headers.Language-Team Freave --headers.Project-Id-Version 1.1"
   },
   "repository": {
     "type": "git",
