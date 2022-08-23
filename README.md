@@ -38,12 +38,12 @@
 
 Install with npm:
 ```bash
-npm install --save-dev make-pot
+npm install --save-dev @freave/make-pot
 ```
 
 Install with yarn:
 ```bash
-yarn add make-pot --dev
+yarn add @freave/make-pot --dev
 ```
 
 ### Usage
