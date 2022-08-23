@@ -1,6 +1,6 @@
 {
   "name": "@freave/make-pot",
-  "version": "0.0.5-beta",
+  "version": "0.0.6",
   "description": "Scans files in a given directory for translatable strings. Generates a POT file.",
   "main": "dist/src/index.js",
   "files": [
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "pot": "make-pot --source test/nested --destination test --domain domain"
+    "pot": "make-pot --source test/nested --destination test --domain domain --headers.Language-Team Freave --headers.Project-Id-Version 1.1"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "author": "Mike van Egmond <mikevanegmond1998@gmail.com> (https://egmond.dev)",
   "contributors": [
     "Mike van Egmond <mikevanegmond1998@gmail.com> (https://egmond.dev)",
-    "Freave <support@freave.com> (https://www.freave.com)"
+    "Freave B.V. <oss@freave.com> (https://www.freave.com)"
   ],
   "license": "MIT",
   "bugs": {
