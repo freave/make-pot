@@ -91,4 +91,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Credits
 
 Mike van Egmond - [egmond.dev](https://egmond.dev) - mikevanegmond1998@gmail.com<br>
-Freave - [Freave.com](https://www.freave.com) - support@freave.com
+Freave B.V. - [Freave.com](https://www.freave.com) - oss@freave.com
