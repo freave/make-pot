@@ -17,6 +17,9 @@ export const initArgs = (): makePotArguments => {
         .scriptName("make-pot")
         .usage("$0 <args>")
         .version(getVersion())
+        .parserConfiguration({
+            "camel-case-expansion": false
+        })
         .options({
             'source': {
                 demandOption: true,
@@ -33,9 +36,9 @@ export const initArgs = (): makePotArguments => {
                 describe: "The domain that will be used in the POT file.",
                 type: "string"
             },
-            'headers.projectIdVersion': {
+            'headers': {
                 demandOption: false,
-                describe: "The headers that will be added to the POT file.",
+                describe: "The headers that will be added to the POT file. Example: --headers.Language-Team Freave",
                 type: "string",
                 'string': true
             }

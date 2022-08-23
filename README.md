@@ -20,8 +20,9 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#development">Development</a></li>
-        <li><a href="#Development in a separate project">Development in a separate project</a></li>
+        <li><a href="#Installation">Installation</a></li>
+        <li><a href="#Usage">Usage</a></li>
+        <li><a href="#CLI%20options">CLI options</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -33,38 +34,54 @@
 
 ## Getting Started
 
-### Development
-Install dependencies.<br>
-`npm install`
+### Installation
 
-Compile TypeScript.<br>
-`npm run watch`
+Install with npm:
+```bash
+npm install --save-dev make-pot
+```
 
-Allows you to run the make-pot command.<br>
-`npm link`
+Install with yarn:
+```bash
+yarn add make-pot --dev
+```
 
-To undo this link use<br>
-`npm unlink make-pot`<br>
-`npm rm --global make-pot`
+### Usage
 
-Runs the command.<br>
-`make-pot`
+```bash
+make-pot --source path/to/input/folder --destination path/to/output/folder --domain domain
+```
 
-### Development in a separate project
-from the root of the project run this command.<br>
-`npm pack`
+### CLI options
 
-In a separate project add this to package.json to use this local version:<br>
-`"make-pot": "path/to/make-pot-0.0.1.tgz"`
+make-pot --help output:
+```bash
+make-pot <args>
 
-Run npm install and use package as you normally would.
+Options:
+  --help         Show help                                                      [boolean]
+  --version      Show version number                                            [boolean]
+  --source       Space-seperated list of directories that should be searched.   [array] [required]
+  --destination  Directory where the POT file will be placed.                   [string] [required]
+  --domain       The domain that will be used inside the POT file.              [string] [required]
+  --headers      The headers that will be added to the POT file.                [string]
+                 Example: --headers.Language-Team Acme                        
+```
 
+Examples:
+
+```bash
+make-pot --source app resources --destination resources/lang --domain freave --headers.Report-Msgid-Bugs-To translations@acme.com --headers.Language-Team Acme
+```
+
+This will look for files in the `app` and `resources` directories and will create a POT file in the `resources/lang` directory with the domain `freave` and the headers `Report-Msgid-Bugs-To` and `Language-Team Acme` changed.
 
 ## Roadmap
 
-- [ ] PHP support
-- [ ] Blade support
-- [ ] Support all WordPress translation functions
+- [x] PHP support
+- [x] Blade support
+- [x] Support all WordPress translation functions
+- [x] POT file header is customizable
 - [ ] Option to select output type (POT or JSON)
 
 See the [open issues](https://github.com/freave/make-pot/issues) for a full list of proposed features (and known issues).
