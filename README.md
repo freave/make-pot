@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-<img src="images/fas-language-freave-green.svg" alt="Logo" height="100">
+<img src="https://freave.cdn.freavehd.net/com/logos/fas-language-freave-green.svg" alt="Logo" height="100">
 
 <h3 align="center">Freave make-pot</h3>
 
