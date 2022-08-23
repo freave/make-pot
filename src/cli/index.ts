@@ -37,7 +37,7 @@ export const makePot = async () => {
 
     console.log(c.black.bgGreen('Found ' + filteredMatches.length + ' matches.'));
 
-    writePotFile(filteredMatches, args.destination, args.domain);
+    writePotFile(filteredMatches, args.destination, args.domain, args.headers);
 
     console.log(c.green('\nPOT file created in ' + args.destination + '/' + args.domain + '.pot'));
 }

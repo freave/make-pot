@@ -9,6 +9,7 @@ interface makePotArguments {
     source: Array<string>;
     destination: string;
     domain: string;
+    headers?: any;
 }
 
 export const initArgs = (): makePotArguments => {
@@ -31,6 +32,12 @@ export const initArgs = (): makePotArguments => {
                 demandOption: true,
                 describe: "The domain that will be used in the POT file.",
                 type: "string"
+            },
+            'headers.projectIdVersion': {
+                demandOption: false,
+                describe: "The headers that will be added to the POT file.",
+                type: "string",
+                'string': true
             }
         })
         .parse();
