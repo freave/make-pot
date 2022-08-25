@@ -10,7 +10,11 @@ const args = initArgs();
 export const makePot = async () => {
     console.log(c.black.bgGreen("Freave make-pot " + getVersion()));
 
-    const results: any[] = await walkDirectories(args.source);
+    let results: any[] = await walkDirectories(args.source);
+
+    results = results.filter((result) => {
+        return result !== undefined;
+    });
 
     if (results.length === 0) {
         console.log(c.red("No matches found."));

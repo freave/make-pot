@@ -82,7 +82,9 @@ This will look for files in the `app` and `resources` directories and will creat
 - [x] Blade support
 - [x] Support all WordPress translation functions
 - [x] POT file header is customizable
+- [ ] Read info from style.css
 - [ ] Option to select output type (POT or JSON)
+- [ ] JSON / JS support
 
 See the [open issues](https://github.com/freave/make-pot/issues) for a full list of proposed features (and known issues).
 
