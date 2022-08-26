@@ -4,6 +4,7 @@ import {getMatches} from "../helpers/getMatches";
 import {getVersion} from "../helpers/getVersion";
 import {initArgs} from "../helpers/args";
 import {writePotFile} from "../helpers/writePotFile";
+import {deduplicate} from "../helpers/deduplicate";
 
 const args = initArgs();
 
@@ -36,6 +37,8 @@ export const makePot = async () => {
     });
 
     console.log(c.black.bgGreen('Found ' + filteredMatches.length + ' matches.'));
+
+    filteredMatches = deduplicate(filteredMatches);
 
     writePotFile(filteredMatches, args.destination, args.domain, args.headers);
 
