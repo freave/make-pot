@@ -12,10 +12,6 @@ export const makePot = async () => {
 
     let results: any[] = await walkDirectories(args.source);
 
-    results = results.filter((result) => {
-        return result !== undefined;
-    });
-
     if (results.length === 0) {
         console.log(c.red("No matches found."));
         return;

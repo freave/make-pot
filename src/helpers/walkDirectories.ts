@@ -11,6 +11,7 @@ async function getFiles(dir: string): Promise<any> {
         dirents = await readdir(dir, {withFileTypes: true});
     } catch (e) {
         console.log(c.red(`Could not read directory: ${dir}`));
+        console.log(e);
         return [];
     }
 
@@ -19,6 +20,11 @@ async function getFiles(dir: string): Promise<any> {
 
         if (!dirent.isDirectory() && extname(res) === '.php') {
             return res;
+        }
+
+        if (dirent.isSymbolicLink() && !dirent.isFile()) {
+            // Symbolic links are not supported
+            return;
         }
 
         return dirent.isDirectory() ? getFiles(res) : undefined;
@@ -35,7 +41,13 @@ export const walkDirectories = async (directories: string[]): Promise<any[]> => 
         results.push(getFiles(directory));
     }
 
-    const resolvedResults = await Promise.all(results);
+    let resolvedResults = await Promise.all(results);
 
-    return resolvedResults.flat();
+    resolvedResults = resolvedResults.flat();
+
+    resolvedResults = resolvedResults.filter((result) => {
+        return result !== undefined;
+    });
+
+    return resolvedResults;
 }
