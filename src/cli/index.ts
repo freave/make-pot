@@ -4,44 +4,32 @@ import {getMatches} from "../helpers/getMatches";
 import {getVersion} from "../helpers/getVersion";
 import {initArgs} from "../helpers/args";
 import {writePotFile} from "../helpers/writePotFile";
+import {deduplicate} from "../helpers/deduplicate";
 
 const args = initArgs();
 
 export const makePot = async () => {
-    console.log(c.black.bgGreen("Freave make-pot " + getVersion()));
+    console.info(c.black.bgGreen(`Freave make-pot ${getVersion()}`));
 
-    let results: any[] = await walkDirectories(args.source);
+    // Filter out files that are undefined or ending in .pot
+    const files: string[] = (await walkDirectories(args.source))
+      .filter((result) => result !== undefined && !result.match(/.pot$/))
 
-    results = results.filter((result) => {
-        return result !== undefined;
-    });
-
-    if (results.length === 0) {
-        console.log(c.red("No matches found."));
+    if (files.length === 0) {
+        console.warn(c.red("No matching files found."));
         return;
     }
 
-    // filter out the files ending in .pot
-    let filteredResults = results.filter((result: string) => {
-        return !result.match(/.pot$/);
-    });
+    console.info(c.green(`Searching ${files.length} files...`));
 
-    if (filteredResults.length === 0) {
-        console.log(c.red("No matches found."));
-        return;
-    }
+    let matches = (await getMatches(files))
+      .filter(({ match }) => match.domain === args.domain);
 
-    console.log(c.green("Searching " + filteredResults.length + " files..."));
+    console.info(c.black.bgGreen(`Found ${matches.length} matches.`));
 
-    let allMatches = await getMatches(filteredResults);
+    matches = deduplicate(matches);
 
-    let filteredMatches = allMatches.filter((match: any) => {
-        return match.match.domain === args.domain;
-    });
+    writePotFile(matches, args.destination, args.domain, args.headers);
 
-    console.log(c.black.bgGreen('Found ' + filteredMatches.length + ' matches.'));
-
-    writePotFile(filteredMatches, args.destination, args.domain, args.headers);
-
-    console.log(c.green('\nPOT file created in ' + args.destination + '/' + args.domain + '.pot'));
+    console.info(c.green('\nPOT file created in ' + args.destination + '/' + args.domain + '.pot'));
 }
