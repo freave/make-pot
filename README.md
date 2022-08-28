@@ -95,6 +95,12 @@ Contributions are what make the open source community such an amazing place to l
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 
+### Before you start
+Make sure all commits are signed and marked as "verified". This is a requirement for merging pull requests.
+You can find instructions for signing commits [here](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
+
+### How to contribute
+
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
