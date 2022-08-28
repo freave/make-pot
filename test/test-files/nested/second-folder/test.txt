@@ -1,0 +1,42 @@
+<p>
+    {{ __('text 1 ignored', 'domain') }}
+</p>
+<p>
+    @php _e('text 2 ignored', 'domain') @endphp
+</p>
+<p>
+    {{ _n('single 1 ignored', 'plural 1 ignored', 1, 'domain') }}
+</p>
+<p>
+    {{ _x('text 3 ignored', 'context', 'domain') }}
+</p>
+<p>
+    @php _ex('text 4 ignored', 'context', 'domain') @endphp
+</p>
+<p>
+    {{ _nx('single 2 ignored', 'plural 2 ignored', 1, 'context', 'domain') }}
+</p>
+<p>
+    {{ esc_attr__('text 5 ignored', 'domain') }}
+</p>
+<p>
+    @php esc_attr_e('text 6 ignored', 'domain') @endphp
+</p>
+<p>
+    {{ esc_attr_x('text 7 ignored', 'context', 'domain') }}
+</p>
+<p>
+    {{ esc_html__('text 8 ignored', 'domain') }}
+</p>
+<p>
+    @php esc_html_e('text 9 ignored', 'domain') @endphp
+</p>
+<p>
+    {{ esc_html_x('text 10 ignored', 'context', 'domain') }}
+</p>
+<p>
+    @php _n_noop('singular 3 ignored', 'plural 3 ignored', 'domain') @endphp
+</p>
+<p>
+    @php _nx_noop('singular 4 ignored', 'plural 4 ignored', 'context', 'domain') @endphp
+</p>
