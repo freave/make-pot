@@ -1,6 +1,6 @@
 {
   "name": "@freave/make-pot",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Scans files in a given directory for translatable strings. Generates a POT file.",
   "main": "dist/src/index.js",
   "files": [
@@ -12,8 +12,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
-    "pot": "make-pot --source test/nested --destination test --domain domain --headers.Language-Team Freave --headers.Project-Id-Version 1.1"
+    "test": "jest --silent --coverage",
+    "pot": "make-pot --source test/test-files --destination test --domain domain --headers.Language-Team Freave --headers.Project-Id-Version 1.1"
   },
   "repository": {
     "type": "git",

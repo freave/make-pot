@@ -5,15 +5,14 @@ import {getVersion} from "../helpers/getVersion";
 import {initArgs} from "../helpers/args";
 import {writePotFile} from "../helpers/writePotFile";
 import {deduplicate} from "../helpers/deduplicate";
+import { matchResults } from "../types";
 
 const args = initArgs();
 
 export const makePot = async () => {
     console.info(c.black.bgGreen(`Freave make-pot ${getVersion()}`));
 
-    // Filter out files that are undefined or ending in .pot
-    const files: string[] = (await walkDirectories(args.source))
-      .filter((result) => result !== undefined && !result.match(/.pot$/))
+    const files: string[] = (await walkDirectories(args.source));
 
     if (files.length === 0) {
         console.warn(c.red("No matching files found."));
@@ -22,12 +21,11 @@ export const makePot = async () => {
 
     console.info(c.green(`Searching ${files.length} files...`));
 
-    let matches = (await getMatches(files))
-      .filter(({ match }) => match.domain === args.domain);
-
-    console.info(c.black.bgGreen(`Found ${matches.length} matches.`));
+    let matches: matchResults[] = (await getMatches(files)).filter(({ match }) => match.domain === args.domain);
 
     matches = deduplicate(matches);
+
+    console.info(c.black.bgGreen(`Found ${matches.length} matches.`));
 
     writePotFile(matches, args.destination, args.domain, args.headers);
 

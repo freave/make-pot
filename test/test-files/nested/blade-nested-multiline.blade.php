@@ -1,100 +1,57 @@
 <p>
-    {{ __('text 1', 'domain') }}
-</p>
-<p>
-    @php _e('text 2', 'domain') @endphp
-</p>
-<p>
-    {{ _n('single 1', 'plural 1', 1, 'domain') }}
-</p>
-<p>
-    {{ _x('text 3', 'context', 'domain') }}
-</p>
-<p>
-    @php _ex('text 4', 'context', 'domain') @endphp
-</p>
-<p>
-    {{ _nx('single 2', 'plural 2', 1, 'context', 'domain') }}
-</p>
-<p>
-    {{ esc_attr__('text 5', 'domain') }}
-</p>
-<p>
-    @php esc_attr_e('text 6', 'domain') @endphp
-</p>
-<p>
-    {{ esc_attr_x('text 7', 'context', 'domain') }}
-</p>
-<p>
-    {{ esc_html__('text 8', 'domain') }}
-</p>
-<p>
-    @php esc_html_e('text 9', 'domain') @endphp
-</p>
-<p>
-    {{ esc_html_x('text 10', 'context', 'domain') }}
-</p>
-<p>
-    @php _n_noop('singular 3', 'plural 3', 'domain') @endphp
-</p>
-<p>
-    @php _nx_noop('singular 4', 'plural 4', 'context', 'domain') @endphp
-</p>
-
-<p>
-    {{ __('text 1',
+    {{ __('text 1 multiline',
     'domain') }}
 </p>
 <p>
-    @php _e('text 2',
+    @php _e('text 2 multiline',
     'domain') @endphp
 </p>
 <p>
-    {{ _n('single 1',
+    {{ _n('single 1 multiline',
     'plural 1', 1, 'domain') }}
 </p>
 <p>
-    {{ _x('text 3',
+    {{ _x('text 3 multiline',
     'context', 'domain') }}
 </p>
 <p>
-    @php _ex('text 4',
+    @php _ex('text 4 multiline',
     'context', 'domain') @endphp
 </p>
 <p>
-    {{ _nx('single 2',
+    {{ _nx('single 2 multiline',
     'plural 2', 1, 'context', 'domain') }}
 </p>
 <p>
-    {{ esc_attr__('text 5',
+    {{ esc_attr__('text 5 multiline',
     'domain') }}
 </p>
 <p>
-    @php esc_attr_e('text 6',
+    @php esc_attr_e('text 6 multiline',
     'domain') @endphp
 </p>
 <p>
-    {{ esc_attr_x('text 7',
+    {{ esc_attr_x('text 7 multiline',
     'context', 'domain') }}
 </p>
 <p>
-    {{ esc_html__('text 8',
+    {{ esc_html__('text 8 multiline',
     'domain') }}
 </p>
 <p>
-    @php esc_html_e('text 9',
+    @php esc_html_e('text 9 multiline',
     'domain') @endphp
 </p>
 <p>
-    {{ esc_html_x('text 10',
+    {{ esc_html_x('text 10 multiline',
     'context', 'domain') }}
 </p>
 <p>
-    @php _n_noop('singular 3',
+    @php _n_noop('singular 3 multiline',
     'plural 3', 'domain') @endphp
 </p>
 <p>
-    @php _nx_noop('singular 4',
+    @php _nx_noop('singular 4 multiline',
     'plural 4', 'context', 'domain') @endphp
 </p>
 

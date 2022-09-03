@@ -1,53 +1,51 @@
-import {readdir} from "node:fs/promises";
-import {resolve, extname} from "node:path";
+import { readdir } from "node:fs/promises";
+import { resolve, extname } from "node:path";
 import c from "ansi-colors";
+import { Dirent } from "fs";
+
+type file = (string | undefined);
 
 // https://stackoverflow.com/a/45130990/8678755
-async function getFiles(dir: string): Promise<any> {
+const getFiles = async (dir: string): Promise<file[] | []> => {
 
-    let dirents: any[] = [];
+  let dirents: Dirent[] = [];
 
-    try {
-        dirents = await readdir(dir, {withFileTypes: true});
-    } catch (e) {
-        console.log(c.red(`Could not read directory: ${dir}`));
-        console.log(e);
-        return [];
+  try {
+    dirents = await readdir(dir, { withFileTypes: true });
+  } catch (e) {
+    console.log(c.red(`Could not read directory: ${dir}`));
+    console.log(e);
+    return [];
+  }
+
+  const files = await Promise.all(dirents.map((dirent) => {
+    const res = resolve(dir, dirent.name);
+
+    if (!dirent.isDirectory() && extname(res) === '.php') {
+      return res;
     }
 
-    const files = await Promise.all(dirents.map((dirent) => {
-        const res = resolve(dir, dirent.name);
+    if (dirent.isSymbolicLink() && !dirent.isFile()) {
+      // Symbolic links are not supported
+      return;
+    }
 
-        if (!dirent.isDirectory() && extname(res) === '.php') {
-            return res;
-        }
+    return dirent.isDirectory() ? getFiles(res) : undefined;
+  }));
 
-        if (dirent.isSymbolicLink() && !dirent.isFile()) {
-            // Symbolic links are not supported
-            return;
-        }
-
-        return dirent.isDirectory() ? getFiles(res) : undefined;
-    }));
-    return Array.prototype.concat(...files);
+  return Array.prototype.concat(...files);
 }
 
-export const walkDirectories = async (directories: string[]): Promise<any[]> => {
-    let results: any[] = [];
+export const walkDirectories = async (directories: string[]): Promise<string[]> => {
+  let results: any[] = [];
 
-    if (!directories.length) return results;
+  if (!directories.length) return results;
 
-    for (const directory of directories) {
-        results.push(getFiles(directory));
-    }
+  for (const directory of directories) {
+    results.push(getFiles(directory));
+  }
 
-    let resolvedResults = await Promise.all(results);
+  let resolvedResults = await Promise.all(results);
 
-    resolvedResults = resolvedResults.flat();
-
-    resolvedResults = resolvedResults.filter((result) => {
-        return result !== undefined;
-    });
-
-    return resolvedResults;
+  return resolvedResults.flat().filter((result) => result !== undefined);
 }

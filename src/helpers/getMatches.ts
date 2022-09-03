@@ -1,55 +1,50 @@
-import {readFile} from "node:fs/promises";
-import {matchGroups} from "../consts";
+import { readFile } from "node:fs/promises";
+import { lineEnding, matchGroups } from "../consts";
+import { matchResults } from "../types";
 
-const lineEnding = '\n';
+export const getMatches = async (files: string[]): Promise<matchResults[] | []> => {
+  let contentPromises: any[] = [];
 
-export const getMatches = async (files: string[]) => {
-    let results: any[] = [];
+  for (const file of files) {
+    contentPromises.push({ body: readFile(file, 'utf8'), filename: file });
+  }
 
-    let contentPromises: any[] = [];
+  const contents = await Promise.all(
+    contentPromises.map(async (contentPromise) => {
+        return {
+          ...contentPromise,
+          body: await contentPromise.body
+        };
+      }
+    ));
 
-    for (const file of files) {
-        contentPromises.push({body: readFile(file, 'utf8'), filename: file});
-    }
+  let formattedMatches: matchResults[] = [];
 
-    const contents = await Promise.all(
-        // Resolve all promises, return the resolved values + the filename
-        contentPromises.map(async (contentPromise) => {
-                return {
-                    ...contentPromise,
-                    body: await contentPromise.body
-                };
-            }
-        ));
+  for (const content of contents) {
+    for (const matchGroup of matchGroups) {
+      const results = content.body.match(matchGroup.matchRegex);
 
-    let formattedMatches: any[] = [];
+      if (!results) {
+        continue;
+      }
 
-    for (let content of contents) {
+      for (const match of results) {
+        const lineNumber = content.body.substring(0, content.body.indexOf(match)).split(lineEnding).length;
+        const splitMatch = match.match(matchGroup.extractRegex);
 
-        for (let matchGroup of matchGroups) {
-
-            let results = content.body.match(matchGroup.matchRegex);
-
-            if (results) {
-                for (let match of results) {
-                    let lineNumber = content.body.substring(0, content.body.indexOf(match)).split(lineEnding).length;
-
-                    let splitMatch = match.match(matchGroup.extractRegex);
-
-                    if (splitMatch) {
-
-                        formattedMatches.push({
-                            filename: content.filename,
-                            linenumber: lineNumber,
-                            match: matchGroup.formatMatch(splitMatch)
-                        });
-                    }
-                }
-            }
+        if (!splitMatch) {
+          continue;
         }
+
+        formattedMatches.push({
+          filename: content.filename,
+          lineNumber: lineNumber,
+          match: matchGroup.formatMatch(splitMatch)
+        });
+
+      }
     }
+  }
 
-    results = results.concat(formattedMatches);
-
-    return results;
+  return formattedMatches;
 }

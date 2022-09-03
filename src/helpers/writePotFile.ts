@@ -5,8 +5,15 @@ import path from "node:path";
 export const writePotFile = (data: any[], destination: string, domain: string, headers: any) => {
     let potContent = '';
 
+    data.sort((a: any, b: any) => {
+        if (a.filename === b.filename) {
+            return a.lineNumber - b.lineNumber;
+        }
+        return a.filename.localeCompare(b.filename);
+    });
+
     for (let singleMatch of data) {
-        potContent += '\n\n# ' + path.relative(process.cwd(), singleMatch.filename) + ':' + singleMatch.linenumber + '\n';
+        potContent += '\n\n# ' + path.relative(process.cwd(), singleMatch.filename) + ':' + singleMatch.lineNumber + '\n';
 
         if (singleMatch.match.context) {
             potContent += 'msgctxt "' + singleMatch.match.context + '"\n';
