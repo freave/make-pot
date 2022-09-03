@@ -173,3 +173,5 @@ export const matchGroups: MatchGroup[] = [
         }
     },
 ]
+
+export const lineEnding = '\n';

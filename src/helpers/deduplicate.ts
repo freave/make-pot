@@ -1,5 +1,7 @@
-export const deduplicate = (matches: any[]) => {
-    let deduplicatedMatches: any[] = [];
+import { matchResults } from "../types";
+
+export const deduplicate = (matches: matchResults[]): matchResults[] => {
+    let deduplicatedMatches: matchResults[] = [];
 
     for (const match of matches) {
         let found = false;
