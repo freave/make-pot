@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { lineEnding, matchGroups } from "../consts";
 import { matchResults } from "../types";
 
@@ -6,7 +6,7 @@ export const getMatches = async (files: string[]): Promise<matchResults[] | []> 
   let contentPromises: any[] = [];
 
   for (const file of files) {
-    contentPromises.push({ body: readFileSync(file, 'utf8'), filename: file });
+    contentPromises.push({ body: await readFile(file, 'utf8'), filename: file });
   }
 
   const contents = await Promise.all(
