@@ -1,22 +1,13 @@
-import { readFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import { lineEnding, matchGroups } from "../consts";
 import { matchResults } from "../types";
 
 export const getMatches = async (files: string[]): Promise<matchResults[] | []> => {
-  let contentPromises: any[] = [];
+  let contents: any[] = [];
 
   for (const file of files) {
-    contentPromises.push({ body: await readFile(file, 'utf8'), filename: file });
+    contents.push({ body: readFileSync(file, 'utf8'), filename: file });
   }
-
-  const contents = await Promise.all(
-    contentPromises.map(async (contentPromise) => {
-        return {
-          ...contentPromise,
-          body: await contentPromise.body
-        };
-      }
-    ));
 
   let formattedMatches: matchResults[] = [];
 
